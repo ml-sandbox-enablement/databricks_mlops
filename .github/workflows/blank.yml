@@ -1,0 +1,28 @@
+name: Deploy Databricks Bundle
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: https://dbc-adf4afbc-60f8.cloud.databricks.com
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate
+        run: databricks bundle validate -t dev
+
+      - name: Deploy
+        run: databricks bundle deploy -t dev
+
+      - name: Run pipeline
+        run: databricks bundle run ml_pipeline_job -t dev
