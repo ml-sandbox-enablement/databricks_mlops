@@ -58,4 +58,4 @@ resources:
             - task_key: model_monitoring
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/7_alerts_setup
+            notebook_path: ./src/7_alerts_setup.ipynb
